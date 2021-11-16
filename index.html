@@ -155,6 +155,234 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-numpy_1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="numpy类似于list，但与list对象有区别"><a href="#numpy类似于list，但与list对象有区别" class="headerlink" title="numpy类似于list，但与list对象有区别"></a>numpy类似于list，但与list对象有区别</h2><ol>
+<li>list可以存储多种数据类型，而numpy只能同时存储一种数据类型。</li>
+<li>numpy可以做到线性代数中的矩阵运算，list不可以。</li>
+<li>numpy由c语言实现，它的速度即使经过python解释器后在某些时候都可以直接与c语言比肩。而list作为python最基本的数据结构，它本身并不高效。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = np.arange(<span class="number">10</span>,<span class="number">20</span>,<span class="number">0.1</span>)</span><br><span class="line"><span class="built_in">print</span>(a)</span><br></pre></td></tr></table></figure>
+
+<p>np.arange()：<br>生成一个numpy.array对象，参数类似于python中的range迭代器。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = np.random.random((<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line">a = np.random.randint(<span class="number">1</span>,<span class="number">10</span>,(<span class="number">3</span>,<span class="number">3</span>))</span><br><span class="line"><span class="built_in">print</span>(a)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[[0.70153953 0.32359607 0.94127114]
+ [0.2967885  0.66102347 0.37332759]]
+[[2 4 8]
+ [8 3 9]
+ [5 6 4]]
+</code></pre>
+<p>np.random.<br>随机生成np.array对象。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a = np.zeros((<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line">a = np.ones((<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line">a = np.full((<span class="number">2</span>,<span class="number">3</span>), <span class="number">10</span>)</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line">a = np.eye(<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(a)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[[0. 0. 0.]
+ [0. 0. 0.]]
+[[1. 1. 1.]
+ [1. 1. 1.]]
+[[10 10 10]
+ [10 10 10]]
+[[1. 0. 0.]
+ [0. 1. 0.]
+ [0. 0. 1.]]
+</code></pre>
+<p>几个特殊函数生成几个特殊的np.array对象</p>
+<h2 id="np-array对象具有非常丰富的数据类型"><a href="#np-array对象具有非常丰富的数据类型" class="headerlink" title="np.array对象具有非常丰富的数据类型."></a>np.array对象具有非常丰富的数据类型.</h2><p>windows环境下，默认数据类型为np.uint32<br>mac与linux则需要看系统环境。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># np.asdtype()</span></span><br><span class="line">a = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line"><span class="built_in">print</span>(a.dtype)</span><br><span class="line">a = a.astype(np.int64)</span><br><span class="line"><span class="built_in">print</span>(a.dtype)</span><br></pre></td></tr></table></figure>
+
+<pre><code>int32
+int64
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">a = np.random.randint(<span class="number">0</span>,<span class="number">10</span>,(<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line"><span class="built_in">print</span>(a,a.dtype)</span><br><span class="line"><span class="comment"># size获取元素个数，size是np.array的属性之一。</span></span><br><span class="line"><span class="built_in">print</span>(a.size)</span><br><span class="line"><span class="comment"># ndim获取对象的维度，ndim是np.array的属性之一。</span></span><br><span class="line"><span class="built_in">print</span>(a.ndim)</span><br><span class="line"><span class="comment"># shape获取对象整体维度，shape是np.array的属性之一。</span></span><br><span class="line"><span class="built_in">print</span>(a.shape)</span><br><span class="line"><span class="comment"># reshape进行维度转化</span></span><br><span class="line"><span class="built_in">print</span>(a.reshape(<span class="number">6</span>,))</span><br><span class="line"><span class="comment"># itemsize获取对象每个元素占据的字节，这个4=32/8，每个字节8位总共32位。</span></span><br><span class="line"><span class="built_in">print</span>(a.itemsize)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[[2 3 1]
+ [3 7 0]] int32
+6
+2
+(2, 3)
+[2 3 1 3 7 0]
+4
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## numpy.array可以进行矩阵运算的原因是因为它具有广播机制。</span></span><br><span class="line">a = np.random.randint(<span class="number">0</span>,<span class="number">10</span>,(<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"><span class="built_in">print</span>(a*<span class="number">10</span>)</span><br><span class="line"><span class="built_in">print</span>(a/<span class="number">2</span>)</span><br><span class="line"><span class="comment"># round(n)对象保留n位小数</span></span><br><span class="line"><span class="built_in">print</span>((a/<span class="number">3</span>).<span class="built_in">round</span>(<span class="number">2</span>))</span><br><span class="line"><span class="comment"># 这种独特的广播机制甚至可以进行不同行不同列的运算，（在同列的情况下，多行和一行的运算，在同行的情况下，多列和一列的运算。np.array对象的</span></span><br><span class="line"><span class="comment"># 广播机制是通过默缘维度来进行计算的。）</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>[[1 4 8]
+ [8 1 6]]
+[[10 40 80]
+ [80 10 60]]
+[[0.5 2.  4. ]
+ [4.  0.5 3. ]]
+[[0.33 1.33 2.67]
+ [2.67 0.33 2.  ]]
+</code></pre>
+<h2 id="维度转换的两种方法"><a href="#维度转换的两种方法" class="headerlink" title="维度转换的两种方法"></a>维度转换的两种方法</h2><p>reshape与resize</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># reshape进行一份copy返回，改变后的数据，但不影响原数据</span></span><br><span class="line"><span class="comment"># resize直接改变原数据，调用方法。</span></span><br><span class="line">a = np.random.randint(<span class="number">0</span>,<span class="number">10</span>,(<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line">a_1 = a.reshape(<span class="number">6</span>,)</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"><span class="built_in">print</span>(a_1)</span><br><span class="line">a.resize(<span class="number">6</span>,)</span><br><span class="line"><span class="built_in">print</span>(a)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[[8 8 1]
+ [2 7 2]]
+[[8 8 1]
+ [2 7 2]]
+[8 8 1 2 7 2]
+[8 8 1 2 7 2]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># flatten和ravel</span></span><br><span class="line"><span class="comment"># flatten是拷贝返回</span></span><br><span class="line"><span class="comment"># ravel是视图返回，两者区别在于对返回值的操作是否影响到原对象</span></span><br><span class="line">a = np.random.randint(<span class="number">0</span>,<span class="number">10</span>,(<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line">b = a.flatten()</span><br><span class="line">b[<span class="number">1</span>] = <span class="number">3</span></span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"><span class="comment"># 可以看到a不受影响</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>[[4 1 0]
+ [4 3 8]]
+[[4 1 0]
+ [4 3 8]]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = np.random.randint(<span class="number">0</span>,<span class="number">10</span>,(<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line">b = a.ravel()</span><br><span class="line">b[<span class="number">1</span>] = <span class="number">3</span></span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"><span class="comment"># 可以观察到a直接受到了影响。</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>[[1 0 9]
+ [7 7 7]]
+[[1 3 9]
+ [7 7 7]]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## np.array的对象拼接。</span></span><br><span class="line"><span class="comment"># vstack与hstack与concatenate</span></span><br><span class="line">a1 = np.random.randint(<span class="number">0</span>,<span class="number">10</span>,size=(<span class="number">3</span>,<span class="number">5</span>))</span><br><span class="line">a2 = np.random.randint(<span class="number">0</span>,<span class="number">10</span>,size=(<span class="number">1</span>,<span class="number">5</span>))</span><br><span class="line">a3 = np.vstack([a1,a2])</span><br><span class="line"><span class="built_in">print</span>(a3)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[[6 4 9 8 2]
+ [6 3 0 3 0]
+ [2 0 7 9 6]
+ [2 8 1 3 0]]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># hstack行拼接</span></span><br><span class="line">a1 = np.random.randint(<span class="number">0</span>,<span class="number">10</span>,size=(<span class="number">3</span>,<span class="number">2</span>))</span><br><span class="line">a2 = np.random.randint(<span class="number">0</span>,<span class="number">10</span>,size=(<span class="number">3</span>,<span class="number">1</span>))</span><br><span class="line">a3 = np.hstack([a1,a2])</span><br><span class="line"><span class="built_in">print</span>(a3)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[[1 3 1]
+ [4 2 4]
+ [8 2 6]]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># concatenate利用axio这个参数进行拼接方向的确定。</span></span><br><span class="line">a = np.array([[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>]])</span><br><span class="line">b = np.array([[<span class="number">5</span>, <span class="number">6</span>]])</span><br><span class="line">c = np.concatenate((a, b), axis=<span class="number">0</span>)</span><br><span class="line"><span class="built_in">print</span>(c)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[[1 2]
+ [3 4]
+ [5 6]]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 数组分割，利用hsplit，vsplit，该操作可以直接实现多重分割。</span></span><br><span class="line">a = np.arange(<span class="number">16.0</span>).reshape(<span class="number">4</span>, <span class="number">4</span>)</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line">b,c = np.hsplit(a,<span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>(b)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[[ 0.  1.  2.  3.]
+ [ 4.  5.  6.  7.]
+ [ 8.  9. 10. 11.]
+ [12. 13. 14. 15.]]
+[[ 0.  1.]
+ [ 4.  5.]
+ [ 8.  9.]
+ [12. 13.]]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = np.arange(<span class="number">16.0</span>).reshape(<span class="number">4</span>, <span class="number">4</span>)</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line">b,c,d = np.hsplit(a,np.array([<span class="number">1</span>,<span class="number">2</span>]))</span><br><span class="line"><span class="built_in">print</span>(b)</span><br><span class="line"><span class="built_in">print</span>(c)</span><br><span class="line"><span class="built_in">print</span>(d)</span><br></pre></td></tr></table></figure>
+
+<pre><code>[[ 0.  1.  2.  3.]
+ [ 4.  5.  6.  7.]
+ [ 8.  9. 10. 11.]
+ [12. 13. 14. 15.]]
+[[ 0.]
+ [ 4.]
+ [ 8.]
+ [12.]]
+[[ 1.]
+ [ 5.]
+ [ 9.]
+ [13.]]
+[[ 2.  3.]
+ [ 6.  7.]
+ [10. 11.]
+ [14. 15.]]
+</code></pre>
+<h2 id="做个小测试对比一下list与np-array的速度。"><a href="#做个小测试对比一下list与np-array的速度。" class="headerlink" title="做个小测试对比一下list与np.array的速度。"></a>做个小测试对比一下list与np.array的速度。</h2><ol>
+<li>构建一个很大的数组。</li>
+<li>构建一个计算函数时间的函数。<br> 2.1 time库<br> 2.2 函数装饰器</li>
+<li>将两种分割方法封装到函数中。<br> 3.1 传入可控默认参数</li>
+<li>计算同样条件下的时间差，并可视化（绘图）<br> 3.2 利用matplotlib</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func_time</span>(<span class="params">func</span>):</span></span><br><span class="line">    <span class="keyword">from</span> time <span class="keyword">import</span> time</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">init_func</span>(<span class="params">*args,**kwargs</span>):</span></span><br><span class="line">        start = time()</span><br><span class="line">        func_return = func(*args,**kwargs)</span><br><span class="line">        end = time()</span><br><span class="line">        <span class="keyword">return</span> func_return, end-start</span><br><span class="line">    <span class="keyword">return</span> init_func</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_num</span>(<span class="params">n=<span class="number">10000</span></span>):</span></span><br><span class="line">    re_num = np.arange(n)</span><br><span class="line">    <span class="keyword">return</span> re_num</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@func_time</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">h_split_list</span>(<span class="params">data,n = <span class="number">5000</span></span>):</span></span><br><span class="line">    np.hsplit(data,[i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n)])</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@func_time</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">h_split_np</span>(<span class="params">data,n = <span class="number">5000</span></span>):</span></span><br><span class="line">    np.hsplit(data,np.arange(<span class="number">0</span>,n,<span class="number">1</span>))</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">None</span></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tqdm <span class="keyword">import</span> tqdm</span><br><span class="line"><span class="comment"># 直接选取一百万数据</span></span><br><span class="line">data = get_num(<span class="number">1000000</span>)</span><br><span class="line">time_np = np.zeros((<span class="number">10000</span>,<span class="number">2</span>)).astype(np.float64)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> tqdm(<span class="built_in">range</span>(<span class="number">50000</span>,<span class="number">60000</span>)):</span><br><span class="line">    time_l = h_split_list(data, i)[<span class="number">1</span>]</span><br><span class="line">    time_n = h_split_np(data, i)[<span class="number">1</span>]</span><br><span class="line">    time_np[i-<span class="number">50000</span>] = np.array([time_l, time_n])</span><br></pre></td></tr></table></figure>
+
+<pre><code>100%|████████████████████████████████████████████████████████████████████████████| 10000/10000 [25:28&lt;00:00,  6.54it/s]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 经过测试发现，在一维的情况下，迭代式和np.arange的速度并不会相差太多。但循环的速度却明显慢于他们，根据数据所得：</span></span><br><span class="line"><span class="comment">## 循环&lt;迭代式 and 循环&lt;np.array and 迭代式≈np.array</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>array([[0.07489157, 0.08552456],
+       [0.07862067, 0.08474588],
+       [0.08583903, 0.07922769],
+       [0.07734418, 0.08843541],
+       [0.0754838 , 0.09528446],
+       [0.08944893, 0.07870269],
+       [0.08104563, 0.08205676],
+       [0.08094621, 0.08138871],
+       [0.08068252, 0.07709312],
+       [0.07414293, 0.0772562 ]])
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>([<span class="string">&#x27;第&#x27;</span>+<span class="built_in">str</span>(i+<span class="number">1</span>)+<span class="string">&#x27;次&#x27;</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">10000</span>,<span class="number">1000</span>)])</span><br></pre></td></tr></table></figure>
+
+<pre><code>[&#39;第1次&#39;, &#39;第1001次&#39;, &#39;第2001次&#39;, &#39;第3001次&#39;, &#39;第4001次&#39;, &#39;第5001次&#39;, &#39;第6001次&#39;, &#39;第7001次&#39;, &#39;第8001次&#39;, &#39;第9001次&#39;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">len</span>(time_np)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>10000
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line">plt.rcParams[<span class="string">&#x27;font.sans-serif&#x27;</span>]=[<span class="string">&#x27;SimHei&#x27;</span>]</span><br><span class="line">plt.rcParams[<span class="string">&#x27;axes.unicode_minus&#x27;</span>]=<span class="literal">False</span></span><br><span class="line"></span><br><span class="line">plt.rcParams[<span class="string">&#x27;figure.figsize&#x27;</span>] = (<span class="number">16.0</span>, <span class="number">8.0</span>) <span class="comment"># 设置figure_size尺寸</span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;image.interpolation&#x27;</span>] = <span class="string">&#x27;nearest&#x27;</span> <span class="comment"># 设置 interpolation style</span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;image.cmap&#x27;</span>] = <span class="string">&#x27;gray&#x27;</span> <span class="comment"># 设置 颜色 style</span></span><br><span class="line"></span><br><span class="line">res_1 = plt.bar([i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)],np.hsplit(time_np[<span class="number">0</span>:<span class="number">10000</span>:<span class="number">1000</span>], <span class="number">2</span>)[<span class="number">0</span>].flatten().<span class="built_in">round</span>(<span class="number">2</span>),width=<span class="number">0.4</span>, label=<span class="string">&quot;迭代式&quot;</span>)</span><br><span class="line">res_2 = plt.bar([i+<span class="number">0.4</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)],np.hsplit(time_np[<span class="number">0</span>:<span class="number">10000</span>:<span class="number">1000</span>], <span class="number">2</span>)[<span class="number">1</span>].flatten().<span class="built_in">round</span>(<span class="number">2</span>),width=<span class="number">0.4</span>, label=<span class="string">&#x27;np.array&#x27;</span>)</span><br><span class="line">plt.ylim(<span class="number">0</span>, <span class="number">0.15</span>)</span><br><span class="line">plt.xticks([i + <span class="number">0.2</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)], [<span class="string">&#x27;第&#123;&#125;次&#x27;</span>.<span class="built_in">format</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)])</span><br><span class="line">plt.legend(fontsize=<span class="number">20</span>)</span><br><span class="line"><span class="keyword">for</span> rect <span class="keyword">in</span> res_1:</span><br><span class="line">    height = rect.get_height()</span><br><span class="line">    plt.text(rect.get_x() + rect.get_width() / <span class="number">2</span>, height+<span class="number">0.001</span>, <span class="built_in">str</span>(height), ha=<span class="string">&quot;center&quot;</span>, va=<span class="string">&quot;bottom&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> rect <span class="keyword">in</span> res_2:</span><br><span class="line">    height = rect.get_height()</span><br><span class="line">    plt.text(rect.get_x() + rect.get_width() / <span class="number">2</span>, height+<span class="number">0.001</span>, <span class="built_in">str</span>(height), ha=<span class="string">&quot;center&quot;</span>, va=<span class="string">&quot;bottom&quot;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="output_27_0.png" alt="png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/16/numpy_1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-python的装饰器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
